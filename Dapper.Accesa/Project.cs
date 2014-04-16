@@ -14,4 +14,10 @@ namespace Dapper.Accesa
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
     }
+
+    public enum ProjectType
+    {
+        Internal = 1,
+        External = 2
+    }
 }

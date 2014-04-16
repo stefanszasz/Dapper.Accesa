@@ -112,10 +112,4 @@ namespace Dapper.Accesa
             return customerId;
         }
     }
-
-    public enum ProjectType
-    {
-        Internal = 1,
-        External = 2
-    }
 }
