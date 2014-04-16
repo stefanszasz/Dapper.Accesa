@@ -55,6 +55,8 @@ namespace Dapper.Accesa
                         Assert.True(projects.First().Name == ProjectName);
                     }
 
+                    tx.Commit();
+
                     sqlConnection.Execute("delete [projects]", transaction: tx);
                     sqlConnection.Execute("delete [customers]", transaction: tx);
                 }
@@ -82,6 +84,8 @@ namespace Dapper.Accesa
 
                     Assert.True(first.Name == ProjectName);
                     Assert.True(first.Customer.Name == CustomerName);
+
+                    tx.Commit();
 
                     sqlConnection.Execute("delete [projects]", transaction: tx);
                     sqlConnection.Execute("delete [customers]", transaction: tx);
@@ -132,7 +136,6 @@ namespace Dapper.Accesa
                                   "(@name, @description, @startDate, @endDate, @price, @type, @customerId); " +
                                   "SELECT CAST(SCOPE_IDENTITY() as int)", project, tx);
 
-            tx.Commit();
             return customerId;
         }
     }
