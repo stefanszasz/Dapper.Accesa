@@ -1,4 +1,4 @@
-namespace Dapper.Accesa
+namespace Dapper.Accesa.Model
 {
     public class Customer
     {

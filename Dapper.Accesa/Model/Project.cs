@@ -1,6 +1,6 @@
 using System;
 
-namespace Dapper.Accesa
+namespace Dapper.Accesa.Model
 {
     public class Project
     {

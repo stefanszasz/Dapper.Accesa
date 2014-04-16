@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using Dapper.Accesa.Model;
 using FizzWare.NBuilder;
 using Xunit;
 using Assert = Xunit.Assert;
@@ -85,6 +86,29 @@ namespace Dapper.Accesa
                     sqlConnection.Execute("delete [projects]", transaction: tx);
                     sqlConnection.Execute("delete [customers]", transaction: tx);
                 }
+            }
+        }
+
+
+        [Fact]
+        public void Query_with_non_default_constructor()
+        {
+            using (var sqlConnection = new SqlConnection(ConnectionString))
+            {
+                sqlConnection.Open();
+                var users = new List<UserNonDefaultConstructor>
+                {
+                    new UserNonDefaultConstructor("firstUser") { FirstName = "FirstName1", LastName = "LastName1" },
+                    new UserNonDefaultConstructor("secondUser") {FirstName = "FirstName2", LastName = "LastName2" },
+                };
+                sqlConnection.Execute("insert into [users] (UserName, FirstName, LastName) values (@userName, @firstName, @lastName)", users);
+
+                var fetchUsers = sqlConnection.Query("select * from [users]")
+                                              .Select(row => new UserNonDefaultConstructor(row.UserName) { Id = row.Id, FirstName = row.FirstName, LastName = row.LastName })
+                                              .ToList();
+                Assert.NotEmpty(fetchUsers);
+
+                sqlConnection.Execute("delete [users]");
             }
         }
 
