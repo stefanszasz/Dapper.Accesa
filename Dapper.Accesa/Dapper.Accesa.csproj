@@ -52,11 +52,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="DapperTests.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="Model\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Model\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
